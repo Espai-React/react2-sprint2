@@ -79,3 +79,48 @@ const parellOImparell = (arrayNum) => {
   }
 };
 parellOImparell([11, 20, 34, 4, 15, 43, 27, 8, 92, 121]);
+
+//Ex.1.3 Callbacks
+console.log('-------- Ex.1.3 Callbacks --------');
+
+//Ex.1 Callback bàsic
+const processar = (num, callback) => callback(num);
+console.log(
+  'processar(2, (callback) -->',
+  processar(2, (num) => `És el número ${num}`)
+);
+
+//Ex.2 Callbacks amb operacions matemàtiques
+const calculadora = (num1, num2, callback) => {
+  return callback(num1, num2);
+};
+console.log(
+  'calculadora(2, 3, (callback)) -->',
+  calculadora(2, 3, (num1, num2) => num1 + num2)
+);
+
+//Ex.3 Ús de callbacks en funcions asíncrones
+const esperarISaludar = (nom, callback) => {
+  setTimeout(() => {
+    callback(nom);
+  }, 2000);
+};
+esperarISaludar('Marc', (nom) => console.log(`Hola ${nom} en 2 segons`));
+
+//Ex.4 Callbacks amb arrays
+const processaElements = (array, callback) => {
+  for (let i = 0; i < array.length; i++) {
+    callback(array[i]);
+  }
+};
+processaElements([2, 4, 5, 6, 8, 14], (num) =>
+  console.log(`El quadrat de ${num} és ${num * num}`)
+);
+
+//Ex.5 Callbacks amb strings
+const processarCadena = (string, callback) => {
+  const stringModificat = string.toUpperCase();
+  callback(stringModificat);
+}
+processarCadena('hola', (string) => console.log(`${string} en majúscules`));
+
