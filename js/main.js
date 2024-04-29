@@ -34,7 +34,7 @@ const person = new Person('Jordi');
 console.log('person.greet() -->', person.greet());
 
 //Ex.4 Funció fletxa amb setTimeout
-const holaEn3s = () => setTimeout(() => console.log('Hola en 3 segons'), 3000);
+const holaEn3s = () => setTimeout(() => console.log('holaEn3s() --> Hola en 3 segons'), 3000);
 holaEn3s();
 
 //Ex.1.2 Operador ternari
@@ -78,6 +78,7 @@ const parellOImparell = (arrayNum) => {
     );
   }
 };
+console.log('parellOImparell([11, 20, 34, 4, 15, 43, 27, 8, 92, 121]) -->');
 parellOImparell([11, 20, 34, 4, 15, 43, 27, 8, 92, 121]);
 
 //Ex.1.3 Callbacks
@@ -86,7 +87,7 @@ console.log('-------- Ex.1.3 Callbacks --------');
 //Ex.1 Callback bàsic
 const processar = (num, callback) => callback(num);
 console.log(
-  'processar(2, (callback) -->',
+  'processar(2, (callback)) -->',
   processar(2, (num) => `És el número ${num}`)
 );
 
@@ -102,10 +103,10 @@ console.log(
 //Ex.3 Ús de callbacks en funcions asíncrones
 const esperarISaludar = (nom, callback) => {
   setTimeout(() => {
-    callback(nom);
+    console.log(`esperarISaludar('Marc', (callback)) -->`, callback(nom));
   }, 2000);
 };
-esperarISaludar('Marc', (nom) => console.log(`Hola ${nom} en 2 segons`));
+esperarISaludar('Marc', (nom) => `Hola ${nom} en 2 segons`);
 
 //Ex.4 Callbacks amb arrays
 const processaElements = (array, callback) => {
@@ -113,6 +114,7 @@ const processaElements = (array, callback) => {
     callback(array[i]);
   }
 };
+console.log('processaElements([2, 4, 5, 6, 8, 14], (callback) -->');
 processaElements([2, 4, 5, 6, 8, 14], (num) =>
   console.log(`El quadrat de ${num} és ${num * num}`)
 );
@@ -120,7 +122,9 @@ processaElements([2, 4, 5, 6, 8, 14], (num) =>
 //Ex.5 Callbacks amb strings
 const processarCadena = (string, callback) => {
   const stringModificat = string.toUpperCase();
-  callback(stringModificat);
-}
-processarCadena('hola', (string) => console.log(`${string} en majúscules`));
-
+  return callback(stringModificat);
+};
+console.log(
+  'processarCadena("hola", (callback)) -->',
+  processarCadena('hola', (string) => `${string} en majúscules`)
+);
