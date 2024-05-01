@@ -242,14 +242,14 @@ console.log('nums8Filter -->', nums8Filter);
 
 //Ex.4 for in
 const objecte6 = { nom: 'Ona', edat: 25, ciutat: 'Barcelona' };
-console.log("objecte6 for in -->");
+console.log('objecte6 for in -->');
 for (let propietat in objecte6) {
   console.log(`${propietat}: ${objecte6[propietat]}`);
 }
 
 //Ex.5 for of amb break
 const nums9 = [1, 2, 3, 4, 5, 6];
-console.log("nums9 for of amb break-->");
+console.log('nums9 for of amb break-->');
 for (let num of nums9) {
   console.log(num);
   if (num === 5) break;
@@ -257,25 +257,85 @@ for (let num of nums9) {
 
 //Ex.6 for of amb index
 const noms3 = ['Anna', 'Bernat', 'Clara'];
-console.log("noms3 for of amb index -->");
+console.log('noms3 for of amb index -->');
 for (let nom of noms3) {
   console.log(`${noms3.indexOf(nom)}. ${nom}`);
 }
 
-console.log("noms3 for amb index -->");
+console.log('noms3 for amb index -->');
 for (let i = 0; i < noms3.length; i++) {
   console.log(`${i}. ${noms3[i]}`);
 }
 
-console.log("noms3.entries() for of amb index -->");
-console.log("noms3.entries() -->",noms3.entries());
+console.log('noms3.entries() for of amb index -->');
+console.log('noms3.entries() -->', noms3.entries());
 for (let [index, nom] of noms3.entries()) {
   console.log(`${index}. ${nom}`);
 }
 
+//Ex.1.7 Promeses & async/await
+console.log('-------- Ex.1.7 Promeses & async/await--------');
 
+//Ex.1 Creació d'una promesa
+const novaPromesa = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Hola món');
+  }, 2000);
+});
 
+//Ex.2 Utilització d'una promesa
+novaPromesa.then((valor) => console.log('novaPromesa .then -->', valor));
 
+//Ex.3 Promesa amb reject
+const input = 'Hola nois';
+const novaPromesa2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (input === 'Hola') resolve('Hola món');
+    else reject('no Hola món');
+  }, 2000);
+});
+console.log('novaPromesa2 -->');
+novaPromesa2
+  .then((valor) => console.log('novaPromesa2 .then -->', valor))
+  .catch((error) => console.log('novaPromesa2 .catch -->', error));
 
+//Ex.4 Async/await
+const rebrePromesa = async () => {
+  const resposta = await novaPromesa;
+  console.log('rebrePromesa async/await -->', resposta);
+};
+// Perquè arribi no abans que les anteriors...
+setTimeout(() => rebrePromesa(), 2000);
 
+//Ex.5 Async/await amb errors
+const rebrePromesa2 = async () => {
+  try {
+    const resposta = await novaPromesa;
+    console.log('rebrePromesa2 async/await try -->', resposta);
+  } catch (error) {
+    console.log('rebrePromesa2 async/await catch -->', error);
+  }
+};
+setTimeout(() => rebrePromesa2(), 2000);
+
+//Ex.6 Promise.all
+const input1 = 'Hola';
+const input2 = 'Món';
+
+const promesa1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (input1 === 'Hola') resolve('Hola');
+    else reject('no Hola');
+  }, 2000);
+});
+const promesa2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (input2 === 'Món') resolve('Món');
+    else reject('no Món');
+  }, 3000);
+});
+
+Promise.all([promesa1, promesa2])
+  .then((resultats) => console.log('resultats Promise.all -->', resultats))
+  .catch((error) => console.log('error Promise.all -->', error));
 
