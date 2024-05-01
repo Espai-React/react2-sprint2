@@ -318,7 +318,7 @@ const rebrePromesa2 = async () => {
 };
 setTimeout(() => rebrePromesa2(), 2000);
 
-//Ex.6 Promise.all
+//Ex.6 Array de Promise.all
 const input1 = 'Hola';
 const input2 = 'Món';
 
