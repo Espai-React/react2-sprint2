@@ -128,3 +128,53 @@ console.log(
   'processarCadena("hola", (callback)) -->',
   processarCadena('hola', (string) => `${string} en majúscules`)
 );
+
+//Ex.1.4 Rest & Spread operators
+console.log('-------- Rest & Spread operators --------');
+
+//Ex.1 Spread oerator en arrays
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arr3 = [...arr1, ...arr2];
+console.log('arr3 -->', arr3);
+
+//Ex.2 Rest operator en funcions
+const suma = (...args) => {
+  let sumaTotal = 0;
+  for (let element of args) {
+    sumaTotal += element;
+  }
+  return sumaTotal;
+}
+console.log('suma(2, 3, 4, 5) -->', suma(2, 3, 4, 5));
+console.log("suma(2, 3, 4, 5, 6, 7, 8, 9, 10) -->", suma(2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+//Ex.3 Copiant objectes amb spread
+const objecte1 = { a: 1, b: 2, c: 3 };
+console.log("objecte1 -->",objecte1);
+
+const objecte2 = { ...objecte1};
+console.log('objecte2 -->', objecte2);
+
+objecte2.c = 4;
+console.log('objecte1 original -->', objecte1);
+console.log('objecte2 canviat -->', objecte2);
+
+//Ex.4 Rest operator en desestructuració
+const arr4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const [primer, segon, ...rest] = arr4;
+console.log('primer -->', primer);
+console.log('segon -->', segon);
+console.log('rest -->', rest);
+
+//Ex.5 Spread operator en funcions
+const nums = [1, 2, 3];
+const suma2 = (numA, numB, numC) => numA + numB + numC;
+console.log('suma2(2, 3, 4) -->', suma2(...nums));
+
+//Ex.6 Spread operator en objectes
+const objecte3 = { a: 1, b: 2, c: 3 };
+const objecte4 = { d: 4, e: 5, f: 6 };
+const objecte5 = { ...objecte3, ...objecte4 };
+console.log('objecte5 -->', objecte5);
+
