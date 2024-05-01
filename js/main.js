@@ -178,3 +178,40 @@ const objecte4 = { d: 4, e: 5, f: 6 };
 const objecte5 = { ...objecte3, ...objecte4 };
 console.log('objecte5 -->', objecte5);
 
+//Ex.1.5 Transformacions d'arrays
+console.log('-------- Transformacions d\'arrays --------');
+
+//Ex.1 Map
+const nums2 = [1, 2, 3, 4];
+const numsMap = nums2.map((num) => num ** 2);
+console.log('numsMap -->', numsMap);
+
+//Ex.2 Filter
+const nums3 = [1, 2, 3, 4];
+const numsFilter = nums3.filter(num => num % 2 === 0);
+console.log('numsFilter -->', numsFilter);
+
+//Ex.3 Find
+const nums4 = [1, 10, 8, 11];
+const numsFind = nums4.find(num => num > 10);
+console.log('numsFind -->', numsFind);
+
+//Ex.4 Reduce
+const nums5 = [13, 7, 8, 21];
+const numsReduce = nums5.reduce((acc, num) => acc + num, 0);
+console.log('numsReduce -->', numsReduce);
+
+//Ex.5 Funció amb callbacks
+const nums6 = [1, 3, 7, 10, 15, 17, 11, 5, 8, 12, 9]
+const operacionsNums6 = nums6.filter(num => num >= 10).map(num => num * 2).reduce((acc, num) => acc + num, 0);
+console.log('operacionsNums6 -->', operacionsNums6);
+
+//Ex.6 Every / Some
+const nums7 = [11, 12, 13, 14];
+const numsEvery = nums7.every(num => num > 10);
+console.log("numsEvery -->", numsEvery);
+const numsSome = nums7.some(num => num > 10);
+console.log("numsSome -->", numsSome);
+
+
+
