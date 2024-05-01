@@ -34,7 +34,8 @@ const person = new Person('Jordi');
 console.log('person.greet() -->', person.greet());
 
 //Ex.4 Funció fletxa amb setTimeout
-const holaEn3s = () => setTimeout(() => console.log('holaEn3s() --> Hola en 3 segons'), 3000);
+const holaEn3s = () =>
+  setTimeout(() => console.log('holaEn3s() --> Hola en 3 segons'), 3000);
 holaEn3s();
 
 //Ex.1.2 Operador ternari
@@ -145,15 +146,18 @@ const suma = (...args) => {
     sumaTotal += element;
   }
   return sumaTotal;
-}
+};
 console.log('suma(2, 3, 4, 5) -->', suma(2, 3, 4, 5));
-console.log("suma(2, 3, 4, 5, 6, 7, 8, 9, 10) -->", suma(2, 3, 4, 5, 6, 7, 8, 9, 10));
+console.log(
+  'suma(2, 3, 4, 5, 6, 7, 8, 9, 10) -->',
+  suma(2, 3, 4, 5, 6, 7, 8, 9, 10)
+);
 
 //Ex.3 Copiant objectes amb spread
 const objecte1 = { a: 1, b: 2, c: 3 };
-console.log("objecte1 -->",objecte1);
+console.log('objecte1 -->', objecte1);
 
-const objecte2 = { ...objecte1};
+const objecte2 = { ...objecte1 };
 console.log('objecte2 -->', objecte2);
 
 objecte2.c = 4;
@@ -179,7 +183,7 @@ const objecte5 = { ...objecte3, ...objecte4 };
 console.log('objecte5 -->', objecte5);
 
 //Ex.1.5 Transformacions d'arrays
-console.log('-------- Transformacions d\'arrays --------');
+console.log("-------- Transformacions d'arrays --------");
 
 //Ex.1 Map
 const nums2 = [1, 2, 3, 4];
@@ -188,12 +192,12 @@ console.log('numsMap -->', numsMap);
 
 //Ex.2 Filter
 const nums3 = [1, 2, 3, 4];
-const numsFilter = nums3.filter(num => num % 2 === 0);
+const numsFilter = nums3.filter((num) => num % 2 === 0);
 console.log('numsFilter -->', numsFilter);
 
 //Ex.3 Find
 const nums4 = [1, 10, 8, 11];
-const numsFind = nums4.find(num => num > 10);
+const numsFind = nums4.find((num) => num > 10);
 console.log('numsFind -->', numsFind);
 
 //Ex.4 Reduce
@@ -202,16 +206,76 @@ const numsReduce = nums5.reduce((acc, num) => acc + num, 0);
 console.log('numsReduce -->', numsReduce);
 
 //Ex.5 Funció amb callbacks
-const nums6 = [1, 3, 7, 10, 15, 17, 11, 5, 8, 12, 9]
-const operacionsNums6 = nums6.filter(num => num >= 10).map(num => num * 2).reduce((acc, num) => acc + num, 0);
+const nums6 = [1, 3, 7, 10, 15, 17, 11, 5, 8, 12, 9];
+const operacionsNums6 = nums6
+  .filter((num) => num >= 10)
+  .map((num) => num * 2)
+  .reduce((acc, num) => acc + num, 0);
 console.log('operacionsNums6 -->', operacionsNums6);
 
 //Ex.6 Every / Some
 const nums7 = [11, 12, 13, 14];
-const numsEvery = nums7.every(num => num > 10);
-console.log("numsEvery -->", numsEvery);
-const numsSome = nums7.some(num => num > 10);
-console.log("numsSome -->", numsSome);
+const numsEvery = nums7.every((num) => num > 10);
+console.log('numsEvery -->', numsEvery);
+const numsSome = nums7.some((num) => num > 10);
+console.log('numsSome -->', numsSome);
+
+//Ex.1.6 Bucles d'arrays
+console.log("-------- Ex.1.6 Bucles d'arrays--------");
+
+//Ex.1 forEach
+const noms = ['Anna', 'Bernat', 'Clara'];
+console.log('noms forEach -->');
+noms.forEach((nom, index) => console.log(nom));
+
+//Ex.2 for of
+const noms2 = ['Josep', 'Maria', 'Pep'];
+console.log('noms for of -->');
+for (let nom of noms2) {
+  console.log(nom);
+}
+
+//Ex.3 filter
+const nums8 = [1, 2, 3, 4, 5, 6];
+const nums8Filter = nums8.filter((num) => num % 2 === 0);
+console.log('nums8Filter -->', nums8Filter);
+
+//Ex.4 for in
+const objecte6 = { nom: 'Ona', edat: 25, ciutat: 'Barcelona' };
+console.log("objecte6 for in -->");
+for (let propietat in objecte6) {
+  console.log(`${propietat}: ${objecte6[propietat]}`);
+}
+
+//Ex.5 for of amb break
+const nums9 = [1, 2, 3, 4, 5, 6];
+console.log("nums9 for of amb break-->");
+for (let num of nums9) {
+  console.log(num);
+  if (num === 5) break;
+}
+
+//Ex.6 for of amb index
+const noms3 = ['Anna', 'Bernat', 'Clara'];
+console.log("noms3 for of amb index -->");
+for (let nom of noms3) {
+  console.log(`${noms3.indexOf(nom)}. ${nom}`);
+}
+
+console.log("noms3 for amb index -->");
+for (let i = 0; i < noms3.length; i++) {
+  console.log(`${i}. ${noms3[i]}`);
+}
+
+console.log("noms3.entries() for of amb index -->");
+console.log("noms3.entries() -->",noms3.entries());
+for (let [index, nom] of noms3.entries()) {
+  console.log(`${index}. ${nom}`);
+}
+
+
+
+
 
 
 
