@@ -99,22 +99,43 @@ function buy(id) {
 // Exercise 2
 function cleanCart() {
   cart.length = 0;
-  console.log("cart -->", cart);  
+  console.log('cart -->', cart);
 }
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   let total = 0;
+  // Aplicar promocions al carro
+  applyPromotionsCart();
   for (let producteCart of cart) {
-    total += producteCart.price * producteCart.quantity;
+    if (producteCart.subTotalWithDiscount)
+      total += producteCart.subTotalWithDiscount;
+    else total += producteCart.price * producteCart.quantity;
   }
-  console.log("total -->", total);
+  console.log('total -->', total);
 }
 
 // Exercise 4
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
+  for (let producteCart of cart) {
+    if (producteCart.id == 1 || producteCart.id == 3) {
+      let product = products.find((element) => element.id === producteCart.id);
+      if (producteCart.quantity >= product.offer.number) {
+        producteCart.subTotalWithDiscount =
+          (producteCart.quantity *
+            Math.round(
+              (producteCart.price -
+                (producteCart.price * product.offer.percent) / 100) *
+                100
+            )) /
+          100;
+      }
+    }
+  }
+  console.log('cart -->', cart);
+  console.table(cart);
 }
 
 // Exercise 5
