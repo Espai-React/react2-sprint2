@@ -91,6 +91,9 @@ function buy(id) {
   }
   console.log('cart -->', cart);
   console.table(cart);
+
+  // Calcular total carro
+  calculateTotal();
 }
 
 // Exercise 2
@@ -102,6 +105,11 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+  let total = 0;
+  for (let producteCart of cart) {
+    total += producteCart.price * producteCart.quantity;
+  }
+  console.log("total -->", total);
 }
 
 // Exercise 4
