@@ -81,7 +81,7 @@ function buy(id) {
   let producteCart = { ...producte };
   // 2. Add found product to the cart array
   let indexProducteCart = cart.findIndex(
-    (element) => element.id === producte.id
+    (element) => element.id === producteCart.id
   );
   if (indexProducteCart != -1) {
     cart[indexProducteCart].quantity++;
@@ -90,7 +90,7 @@ function buy(id) {
     cart.push(producteCart);
   }
   console.log('cart -->', cart);
-  console.table(cart);  
+  console.table(cart);
 }
 
 // Exercise 2
