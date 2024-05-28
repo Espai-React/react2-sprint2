@@ -96,11 +96,11 @@ function buy(id) {
   }
   comptador++;
   document.getElementById('count_product').innerHTML = comptador;
-  console.log('cart -->', cart);
+  console.log('buy -->', cart);
   console.table(cart);
   console.log('comptador -->', comptador);
 
-  // Calcular total carro
+  // Calcular total carro + promocions
   calculateTotal();
 }
 
@@ -109,14 +109,14 @@ function cleanCart() {
   cart.length = 0;
   comptador = 0;
   document.getElementById('count_product').innerHTML = comptador;
-  console.log('cart -->', cart);
+  console.log('cleanCart -->', cart);
   printCart();
 }
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
-  let total = 0;
+  total = 0;
   // Aplicar promocions al carro
   applyPromotionsCart();
   for (let producteCart of cart) {
@@ -147,13 +147,13 @@ function applyPromotionsCart() {
       }
     }
   }
-  console.log('cart -->', cart);
+  console.log('applyPromotionsCart -->', cart);
   console.table(cart);
 }
 
 // Exercise 5
 function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom
+  // Fill the shopping cart modal manipulating the shopping cart dom/* 
   let cart_list = document.getElementById('cart_list');
   cart_list.innerHTML = '';
   let total_price = document.getElementById('total_price');
@@ -173,14 +173,29 @@ function printCart() {
     `;
     cart_list.append(fila);
   }
+  console.log("printCart -->", cart);
   total_price.innerHTML = calculateTotal();
 }
 
 // ** Nivell II **
 
 // Exercise 7
-function removeFromCart(id) {}
+function removeFromCart(id) {
+  let indexProducteCart = cart.findIndex((element) => element.id === id);
+  if (indexProducteCart != -1) {
+    let producteCart = cart[indexProducteCart];
+    if (producteCart.quantity > 1) {
+      producteCart.quantity--;
+    } else {
+      cart.splice(indexProducteCart, 1);
+    }
+    comptador--;
+    document.getElementById('count_product').innerHTML = comptador;
+    printCart();
+  }
+}
 
 function open_modal() {
+  console.log("open_modal -->",cart);  
   printCart();
 }

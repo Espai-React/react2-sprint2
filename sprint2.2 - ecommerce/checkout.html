@@ -31,7 +31,7 @@
       class="navbar py-3 py-lg-0 navbar-light bg-light navbar-expand-lg"
       id="navbar-example2">
       <div class="container d-flex">
-        <a class="navbar-brand" href="#!">ShopNow</a>
+        <a class="navbar-brand" href="index.html">ShopNow</a>
         <div class="d-flex flex-row order-lg-last align-items-center">
           <button
             type="button"
@@ -42,8 +42,9 @@
             aria-controls="navbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <ul
-            class="navbar-nav me-3 me-lg-0 d-flex flex-row align-items-center">
+
+          <!-- Botó carro -->
+          <ul class="navbar-nav me-3 d-flex flex-row align-items-center">
             <li class="dropdown search-dropdown nav-item py-lg-3">
               <a
                 href="javascript:void(0)"
@@ -62,6 +63,13 @@
               </a>
             </li>
           </ul>
+          <!-- Botó buidar carro -->
+          <button
+            type="button"
+            class="btn btn-outline-dark me-3 flex-center"
+            onCLick="cleanCart()">
+            Buidar carret
+          </button>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -233,14 +241,48 @@
               aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div>
-              <ul class="list"></ul>
-              <div>
-                <h3 class="text-center bill px-5">Select Something</h3>
-              </div>
-              <div class="text-center">
-                <a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
-              </div>
+            <h3 class="text-center bill px-5">Shopping Cart</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty.</th>
+                  <th scope="col">Total <small>(with discount)</small></th>
+                </tr>
+              </thead>
+              <tbody id="cart_list">
+                <tr>
+                  <th scope="row">Cooking oil</th>
+                  <td>$10.5</td>
+                  <td>2</td>
+                  <td>$21</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pasta</th>
+                  <td>$6.25</td>
+                  <td>1</td>
+                  <td>$6.25</td>
+                </tr>
+                <tr>
+                  <th scope="row">Lawn dress</th>
+                  <td>$15</td>
+                  <td>3</td>
+                  <td>$45</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center fs-3">
+              Total: $<span id="total_price">100</span>
+            </div>
+            <div class="text-center">
+              <a href="checkout.html" onclick="checkoutPag()" class="btn btn-primary m-3">Checkout</a>
+              <a
+                href="javascript:void(0)"
+                onclick="cleanCart()"
+                class="btn btn-primary m-3"
+                >Clean Cart</a
+              >
             </div>
           </div>
         </div>
