@@ -56,7 +56,7 @@ function validate(event) {
     if (inputs[i] === '' || !validacio) {
       inputs[i].value = '';
       inputs[i].classList.add('is-invalid');
-      errors[i].classList.add('font-bold');
+      errors[i].classList.add('fst-italic');
       error++;
     } else {
       inputs[i].classList.remove('is-invalid');
