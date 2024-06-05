@@ -15,6 +15,7 @@ function guardarDades() {
   localStorage.setItem('cart', JSON.stringify(cart));
   localStorage.setItem('comptador', JSON.stringify(comptador));
   localStorage.setItem('total', JSON.stringify(total));
+  console.log('Guardar dades a localStorage');
 }
 
 // Carregar dades de localStorage
@@ -22,11 +23,13 @@ function recuperarDades() {
   cart = JSON.parse(localStorage.getItem('cart')) ?? [];
   comptador = JSON.parse(localStorage.getItem('comptador') ?? 0);
   total = JSON.parse(localStorage.getItem('total') ?? 0);
+  console.log('Recuperar dades des de localStorage');
 }
 
 // Pintar comptador
 function pintarComptador() {
   document.getElementById('count_product').innerHTML = comptador;
+  console.log('Actualitzar comptador');
 }
 
 // Exercise 1
@@ -69,7 +72,7 @@ function cleanCart() {
   pintarComptador();
   guardarDades();
   console.log('cart -->', cart);
-  open_modal();
+  printCart();
 }
 
 // Exercise 3
@@ -103,6 +106,8 @@ function applyPromotionsCart() {
           100;
         delete producteCart.subTotal;
       }
+    } else {
+      producteCart.subTotal = producteCart.price * producteCart.quantity;
     }
   }
   console.log('applyPromotionsCart -->', cart);
@@ -124,9 +129,13 @@ function printCart() {
       <th scope="row">${producteCart.name}</th>
       <td>${producteCart.price}</td>
       <td>
-      <button class="badge bg-gray text-black rounded-pill border-0" onclick="addToCart(${producteCart.id})">+</button>
+      <button class="badge bg-gray text-black rounded-pill border-0 pb-2" onclick="addToCart(${
+        producteCart.id
+      })">+</button>
       ${producteCart.quantity}
-      <button class="badge bg-gray text-black rounded-pill border-0" onclick="removeFromCart(${producteCart.id})">-</button>
+      <button class="badge bg-gray text-black rounded-pill border-0 pb-2 px-2" onclick="removeFromCart(${
+        producteCart.id
+      })">-</button>
       </td>
       <td>${
         producteCart.subTotal
@@ -146,13 +155,38 @@ function removeFromCart(id) {
   let indexProducteCart = cart.findIndex((element) => element.id === id);
   if (indexProducteCart != -1) {
     let producteCart = cart[indexProducteCart];
+    console.log('producteCart1 -->', producteCart);
     if (producteCart.quantity > 1) {
       producteCart.quantity--;
     } else {
       cart.splice(indexProducteCart, 1);
     }
+    console.log('producteCart2 -->', producteCart);
     comptador--;
-    document.getElementById('count_product').innerHTML = comptador;
+
+    // Calcular total carro + promocions
+    calculateTotal();
+    console.log(total);
+    // Guarda dades a LocalStorage
+    guardarDades();
+    pintarComptador();
+    printCart();
+  }
+}
+
+function addToCart(id) {
+  let indexProducteCart = cart.findIndex((element) => element.id === id);
+  if (indexProducteCart != -1) {
+    let producteCart = cart[indexProducteCart];
+    console.log('producteCart -->', producteCart);
+    producteCart.quantity++;
+    comptador++;
+
+    // Calcular total carro + promocions
+    calculateTotal();
+    // Guarda dades a LocalStorage
+    guardarDades();
+    pintarComptador();
     printCart();
   }
 }
