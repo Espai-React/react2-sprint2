@@ -111,7 +111,7 @@ function applyPromotionsCart() {
 
 // Exercise 5
 function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom/* 
+  // Fill the shopping cart modal manipulating the shopping cart dom/*
   let cart_list = document.getElementById('cart_list');
   cart_list.innerHTML = '';
   let total_price = document.getElementById('total_price');
@@ -123,7 +123,11 @@ function printCart() {
     fila.innerHTML = `
       <th scope="row">${producteCart.name}</th>
       <td>${producteCart.price}</td>
-      <td>${producteCart.quantity}</td>
+      <td>
+      <button class="badge bg-gray text-black rounded-pill border-0" onclick="addToCart(${producteCart.id})">+</button>
+      ${producteCart.quantity}
+      <button class="badge bg-gray text-black rounded-pill border-0" onclick="removeFromCart(${producteCart.id})">-</button>
+      </td>
       <td>${
         producteCart.subTotal
           ? producteCart.subTotal
@@ -154,6 +158,6 @@ function removeFromCart(id) {
 }
 
 function open_modal() {
-  console.log("open_modal -->",cart);  
+  console.log('open_modal -->', cart);
   printCart();
 }
