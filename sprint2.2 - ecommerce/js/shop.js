@@ -16,6 +16,10 @@ function guardarDades() {
   localStorage.setItem('comptador', JSON.stringify(comptador));
   localStorage.setItem('total', JSON.stringify(total));
   console.log('Guardar dades a localStorage');
+  console.log('comptador -->', comptador);
+  console.log('total -->', total);
+  console.log('cart');
+  console.table(cart);
 }
 
 // Carregar dades de localStorage
@@ -24,6 +28,10 @@ function recuperarDades() {
   comptador = JSON.parse(localStorage.getItem('comptador') ?? 0);
   total = JSON.parse(localStorage.getItem('total') ?? 0);
   console.log('Recuperar dades des de localStorage');
+  console.log('comptador -->', comptador);
+  console.log('total -->', total);
+  console.log('cart');
+  console.table(cart);
 }
 
 // Pintar comptador
@@ -54,10 +62,6 @@ function buy(id) {
   }
   comptador++;
   pintarComptador();
-  console.log('cart -->', cart);
-  console.table(cart);
-  console.log('comptador -->', comptador);
-
   // Calcular total carro + promocions
   calculateTotal();
   // Guarda dades a LocalStorage
@@ -71,7 +75,6 @@ function cleanCart() {
   total = 0;
   pintarComptador();
   guardarDades();
-  console.log('cart -->', cart);
   printCart();
 }
 
@@ -86,7 +89,6 @@ function calculateTotal() {
       total += producteCart.subTotalWithDiscount;
     else total += producteCart.subTotal;
   }
-  console.log('total -->', total);
 }
 
 // Exercise 4
@@ -110,8 +112,6 @@ function applyPromotionsCart() {
       producteCart.subTotal = producteCart.price * producteCart.quantity;
     }
   }
-  console.log('applyPromotionsCart -->', cart);
-  console.table(cart);
 }
 
 // Exercise 5
@@ -155,13 +155,11 @@ function removeFromCart(id) {
   let indexProducteCart = cart.findIndex((element) => element.id === id);
   if (indexProducteCart != -1) {
     let producteCart = cart[indexProducteCart];
-    console.log('producteCart1 -->', producteCart);
     if (producteCart.quantity > 1) {
       producteCart.quantity--;
     } else {
       cart.splice(indexProducteCart, 1);
     }
-    console.log('producteCart2 -->', producteCart);
     comptador--;
 
     // Calcular total carro + promocions
@@ -178,7 +176,6 @@ function addToCart(id) {
   let indexProducteCart = cart.findIndex((element) => element.id === id);
   if (indexProducteCart != -1) {
     let producteCart = cart[indexProducteCart];
-    console.log('producteCart -->', producteCart);
     producteCart.quantity++;
     comptador++;
 
@@ -192,6 +189,5 @@ function addToCart(id) {
 }
 
 function open_modal() {
-  console.log('open_modal -->', cart);
   printCart();
 }
