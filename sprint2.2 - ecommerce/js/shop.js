@@ -16,9 +16,7 @@ function guardarDades() {
   localStorage.setItem('comptador', JSON.stringify(comptador));
   localStorage.setItem('total', JSON.stringify(total));
   console.log('Guardar dades a localStorage');
-  console.log('comptador -->', comptador);
   console.log('total -->', total);
-  console.log('cart');
   console.table(cart);
 }
 
@@ -28,9 +26,7 @@ function recuperarDades() {
   comptador = JSON.parse(localStorage.getItem('comptador') ?? 0);
   total = JSON.parse(localStorage.getItem('total') ?? 0);
   console.log('Recuperar dades des de localStorage');
-  console.log('comptador -->', comptador);
   console.log('total -->', total);
-  console.log('cart');
   console.table(cart);
 }
 
@@ -38,27 +34,23 @@ function recuperarDades() {
 function pintarComptador() {
   document.getElementById('count_product').innerHTML = comptador;
   console.log('Actualitzar comptador');
+  console.log('comptador -->', comptador);
 }
 
 // Exercise 1
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
-  let producte = products.find((element) => element.id === id);
-  let producteCart = { ...producte };
-  producteCart.quantity = 0;
-  producteCart.subTotal = 0;
+  const producte = products.find((element) => element.id === id);
+  const producteNou = { ...producte };
   // 2. Add found product to the cart array
-  let indexProducteCart = cart.findIndex(
-    (element) => element.id === producteCart.id
+  const indexProducteCart = cart.findIndex(
+    (element) => element.id === producteNou.id
   );
   if (indexProducteCart != -1) {
     cart[indexProducteCart].quantity++;
-    cart[indexProducteCart].subTotal =
-      cart[indexProducteCart].price * cart[indexProducteCart].quantity;
   } else {
-    producteCart.quantity = 1;
-    producteCart.subTotal = producteCart.price * producteCart.quantity;
-    cart.push(producteCart);
+    producteNou.quantity = 1;
+    cart.push(producteNou);
   }
   comptador++;
   pintarComptador();
@@ -95,28 +87,29 @@ function calculateTotal() {
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
   for (let producteCart of cart) {
+    producteCart.subTotal = producteCart.price * producteCart.quantity;
     if (producteCart.id == 1 || producteCart.id == 3) {
-      let product = products.find((element) => element.id === producteCart.id);
-      if (producteCart.quantity >= product.offer.number) {
+      const producte = products.find(
+        (element) => element.id === producteCart.id
+      );
+      if (producteCart.quantity >= producte.offer.number) {
         producteCart.subTotalWithDiscount =
           (producteCart.quantity *
             Math.round(
               (producteCart.price -
-                (producteCart.price * product.offer.percent) / 100) *
+                (producteCart.price * producte.offer.percent) / 100) *
                 100
             )) /
           100;
         delete producteCart.subTotal;
       }
-    } else {
-      producteCart.subTotal = producteCart.price * producteCart.quantity;
     }
   }
 }
 
 // Exercise 5
 function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom/*
+  // Fill the shopping cart modal manipulating the shopping cart dom
   let cart_list = document.getElementById('cart_list');
   cart_list.innerHTML = '';
   let total_price = document.getElementById('total_price');
@@ -128,14 +121,8 @@ function printCart() {
     fila.innerHTML = `
       <th scope="row">${producteCart.name}</th>
       <td>${producteCart.price}</td>
-      <td>
-      <button class="badge bg-gray text-black rounded-pill border-0 pb-2" onclick="addToCart(${
-        producteCart.id
-      })">+</button>
-      ${producteCart.quantity}
-      <button class="badge bg-gray text-black rounded-pill border-0 pb-2 px-2" onclick="removeFromCart(${
-        producteCart.id
-      })">-</button>
+      <td id="quantity">
+      ${producteCart.quantity} 
       </td>
       <td>${
         producteCart.subTotal
@@ -144,6 +131,12 @@ function printCart() {
       }</td>
     `;
     cart_list.append(fila);
+    let campQuantity = document.getElementById('quantity');
+    campQuantity.innerHTML = `
+      <button class="badge bg-gray text-black rounded-pill border-0 pb-2" onclick="addToCart(${producteCart.id})">+</button>
+      ${producteCart.quantity}
+      <button class="badge bg-gray text-black rounded-pill border-0 pb-2 px-2" onclick="removeFromCart(${producteCart.id})">-</button>
+      `;
   }
   total_price.innerHTML = total;
 }
