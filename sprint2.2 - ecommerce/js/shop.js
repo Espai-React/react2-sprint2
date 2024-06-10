@@ -1,4 +1,4 @@
-
+import products from '../data/products.json';
 // => Reminder, it's extremely important that you debug your code.
 // ** It will save you a lot of time and frustration!
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster.
@@ -8,11 +8,12 @@
 let cart;
 let comptador;
 let total;
-let products;
+//et products;
 recuperarDades();
 pintarComptador();
+console.log(products);
 
-const rebreProducts = async () => {
+/* const rebreProducts = async () => {
   
   try {
     const resposta = await fetch('./data/products.json');
@@ -21,7 +22,7 @@ const rebreProducts = async () => {
     console.error('Error obtaining data:', error);
   }
 };
-rebreProducts();
+rebreProducts(); */
 
 // Guardar dades a localStorage
 function guardarDades() {
