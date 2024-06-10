@@ -1,3 +1,4 @@
+
 // => Reminder, it's extremely important that you debug your code.
 // ** It will save you a lot of time and frustration!
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster.
@@ -7,8 +8,20 @@
 let cart;
 let comptador;
 let total;
+let products;
 recuperarDades();
 pintarComptador();
+
+const rebreProducts = async () => {
+  
+  try {
+    const resposta = await fetch('./data/products.json');
+    products = await resposta.json();
+  } catch (error) {
+    console.error('Error obtaining data:', error);
+  }
+};
+rebreProducts();
 
 // Guardar dades a localStorage
 function guardarDades() {
