@@ -1,4 +1,4 @@
-import products from '../data/products.json';
+import { products } from '../data/products.js';
 // => Reminder, it's extremely important that you debug your code.
 // ** It will save you a lot of time and frustration!
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster.
@@ -7,19 +7,18 @@ import products from '../data/products.json';
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 let cart;
 let comptador;
-let total;
-//et products;
+let total; /* 
+let products; */
+console.log(products);
 recuperarDades();
 pintarComptador();
-console.log(products);
-
-/* const rebreProducts = async () => {
-  
+/* 
+const rebreProducts = async () => {  
   try {
     const resposta = await fetch('./data/products.json');
     products = await resposta.json();
   } catch (error) {
-    console.error('Error obtaining data:', error);
+    console.error('Errors obtenin dades:', error);
   }
 };
 rebreProducts(); */
@@ -52,7 +51,7 @@ function pintarComptador() {
 }
 
 // Exercise 1
-function buy(id) {
+export function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
   const producte = products.find((element) => element.id === id);
   const producteNou = { ...producte };
@@ -75,7 +74,7 @@ function buy(id) {
 }
 
 // Exercise 2
-function cleanCart() {
+export function cleanCart() {
   cart.length = 0;
   comptador = 0;
   total = 0;
@@ -158,7 +157,7 @@ function printCart() {
 // ** Nivell II **
 
 // Exercise 7
-function removeFromCart(id) {
+export function removeFromCart(id) {
   let indexProducteCart = cart.findIndex((element) => element.id === id);
   if (indexProducteCart != -1) {
     let producteCart = cart[indexProducteCart];
@@ -179,7 +178,7 @@ function removeFromCart(id) {
   }
 }
 
-function addToCart(id) {
+export function addToCart(id) {
   let indexProducteCart = cart.findIndex((element) => element.id === id);
   if (indexProducteCart != -1) {
     let producteCart = cart[indexProducteCart];
@@ -195,6 +194,6 @@ function addToCart(id) {
   }
 }
 
-function open_modal() {
+export function open_modal() {
   printCart();
 }
